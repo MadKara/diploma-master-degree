@@ -1,0 +1,54 @@
+package com.karalash.ukrcontent.model.entities;
+
+import lombok.Data;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "content")
+@Data
+public class Content {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "date_time")
+    private Timestamp dateTime;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @OneToMany(mappedBy = "content") //orphanRemoval = true
+    private Set<Gallery> images = new HashSet<>();
+
+    @OneToMany(mappedBy = "content") //orphanRemoval = true
+    private Set<Comment> comments = new HashSet<>();
+
+//    @OneToOne(mappedBy = "content", cascade = CascadeType.ALL)
+//    @PrimaryKeyJoinColumn
+//    private ExternalResources externalResources;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "content_tag",
+            joinColumns = { @JoinColumn(name = "content_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tag_id") })
+    private Set<Tag> tags = new HashSet<>();
+}

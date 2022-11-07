@@ -1,10 +1,26 @@
 import './App.css';
-import Header from './Header';
+import SignInForm from './auth/SignInForm';
+import LogInForm from './auth/LogInForm';
+import Header from './comp/Header';
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer } from 'react-notifications';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+
+import Main from './Main';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
+    <div>
+      <Router>
+        <Header />
+        <Switch>
+          <Route path='/auth' component={Main} />
+          <Route path='/logIn' component={LogInForm} />
+          <Route path='/signIn' component={SignInForm} />
+          <Route render={() => (<Redirect exact to="/signIn" />)} />
+        </Switch>
+        <NotificationContainer />
+      </Router>
     </div>
   );
 }

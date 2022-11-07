@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +20,12 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public ContentDto getById(int id) {
-        return null;
+        Optional<Content> byId = contentRepo.findById(id);
+        if (byId.isEmpty()) {
+            throw new IllegalArgumentException(String.format("Content with %s id not found", id));
+        }
+
+        return contentMapper.toDto(byId.get());
     }
 
     @Override
@@ -30,7 +36,9 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public ContentDto addNew(ContentDto company) {
-        return null;
+        Content contentEntity = contentMapper.toEntity(company);
+        contentRepo.save(contentEntity);
+        return contentMapper.toDto(contentEntity);
     }
 
     @Override

@@ -38,9 +38,9 @@ public class Content {
     @OneToMany(mappedBy = "content") //orphanRemoval = true
     private Set<Comment> comments = new HashSet<>();
 
-//    @OneToOne(mappedBy = "content", cascade = CascadeType.ALL)
-//    @PrimaryKeyJoinColumn
-//    private ExternalResources externalResources;
+    @OneToOne(mappedBy = "content", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private ExternalResources externalResources;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
@@ -51,4 +51,9 @@ public class Content {
             joinColumns = { @JoinColumn(name = "content_id") },
             inverseJoinColumns = { @JoinColumn(name = "tag_id") })
     private Set<Tag> tags = new HashSet<>();
+
+    public void setExternalResources(ExternalResources externalResources) {
+        this.externalResources = externalResources;
+        this.externalResources.setContent(this); // setting the parent class as the value for the child instance
+    }
 }

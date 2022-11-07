@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 public class ContentMapper implements Mapper<ContentDto, Content> {
 
     private final ExternalResourcesMapper externalResourcesMapper;
+    private final UserMapper userMapper;
+    private final CategoryMapper categoryMapper;
 
     @Override
     public ContentDto toDto(Content input) {
@@ -17,7 +19,10 @@ public class ContentMapper implements Mapper<ContentDto, Content> {
                 .id(input.getId())
                 .title(input.getTitle())
                 .description(input.getDescription())
-                //.externalResources(externalResourcesMapper.toDto(input.getExternalResources()))  //
+                .dateTime(input.getDateTime())
+                .user(userMapper.toDto(input.getUser()))
+                .category(categoryMapper.toDto(input.getCategory()))
+                .externalResources(externalResourcesMapper.toDto(input.getExternalResources()))  //
                 .build();
     }
 
@@ -27,7 +32,10 @@ public class ContentMapper implements Mapper<ContentDto, Content> {
         entity.setId(input.getId());
         entity.setTitle(input.getTitle());
         entity.setDescription(input.getDescription());
-        //entity.setExternalResources(externalResourcesMapper.toEntity(input.getExternalResources()));
+        entity.setDateTime(input.getDateTime());
+        entity.setUser(userMapper.toEntity(input.getUser()));
+        entity.setCategory(categoryMapper.toEntity(input.getCategory()));
+        entity.setExternalResources(externalResourcesMapper.toEntity(input.getExternalResources()));
         return entity;
     }
 }

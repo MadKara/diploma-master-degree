@@ -17,7 +17,7 @@ function App() {
           <Route path='/auth' component={Main} />
           <Route path='/logIn' component={LogInForm} />
           <Route path='/signIn' component={SignInForm} />
-          <Route render={() => (<Redirect exact to="/signIn" />)} />
+          <Route render={() => (<Redirect exact to="/auth" />)} />
         </Switch>
         <NotificationContainer />
       </Router>

@@ -9,9 +9,17 @@ public interface ContentService {
 
     List<ContentDto> getAll();
 
-    ContentDto addNew(ContentDto company);
+    List<ContentDto> getByUserId(int id);
 
-    ContentDto updateContent(ContentDto company);
+    List<ContentDto> getByCategory(String name);
 
-    void removeContent(int id);
+    List<ContentDto> getByTitleContaining(String title);
+
+    ContentDto getByTitle(String title);
+
+    ContentDto addNew(ContentDto company, int userId, int categoryId);
+
+    ContentDto updateContent(ContentDto content);
+
+    void deleteContent(int id);
 }

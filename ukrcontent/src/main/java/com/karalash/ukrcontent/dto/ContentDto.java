@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @Builder
@@ -19,4 +20,21 @@ public class ContentDto {
     private UserDto user;
     private CategoryDto category;
     private ExternalResourcesDto externalResources;
+    private List<TagDto> tags;
+
+    public ContentDto(int id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+
+    public ContentDto(int id, String title, String description, Timestamp dateTime, UserDto user, CategoryDto category, ExternalResourcesDto externalResources) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.dateTime = dateTime;
+        this.user = user;
+        this.category = category;
+        this.externalResources = externalResources;
+    }
 }

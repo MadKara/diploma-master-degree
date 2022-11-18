@@ -13,4 +13,6 @@ public interface ExternalResourcesRepo extends JpaRepository<ExternalResources, 
 
     @Transactional
     void deleteByContentId(long tutorialId);
+
+    ExternalResources findById(int id);
 }

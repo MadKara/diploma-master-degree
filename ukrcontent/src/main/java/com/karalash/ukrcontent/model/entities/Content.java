@@ -1,15 +1,18 @@
 package com.karalash.ukrcontent.model.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "content")
 @Data
+@ToString(exclude = {"tags"})
 public class Content {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,10 +53,22 @@ public class Content {
     @JoinTable(name = "content_tag",
             joinColumns = { @JoinColumn(name = "content_id") },
             inverseJoinColumns = { @JoinColumn(name = "tag_id") })
-    private Set<Tag> tags = new HashSet<>();
+    private List<Tag> tags;
 
     public void setExternalResources(ExternalResources externalResources) {
         this.externalResources = externalResources;
         this.externalResources.setContent(this); // setting the parent class as the value for the child instance
     }
+
+//    public Content(int id, String title, String description, Timestamp dateTime, User user, Category category, Set<Gallery> images, Set<Comment> comments, ExternalResources externalResources) {
+//        this.id = id;
+//        this.title = title;
+//        this.description = description;
+//        this.dateTime = dateTime;
+//        this.user = user;
+//        this.category = category;
+//        this.images = images;
+//        this.comments = comments;
+//        this.externalResources = externalResources;
+//    }
 }

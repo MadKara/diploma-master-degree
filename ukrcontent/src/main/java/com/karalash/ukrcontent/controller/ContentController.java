@@ -8,6 +8,7 @@ import org.checkerframework.common.value.qual.ArrayLen;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,9 +52,9 @@ public class ContentController {
     }
 
     @PostMapping
-    public ContentDto addNewContent(@RequestParam String title, @RequestParam String description, @RequestParam int userId, @RequestParam int categoryId) {
+    public ContentDto addNewContent(@RequestParam String title, @RequestParam String description, @RequestParam int userId, @RequestParam(required = false) Integer categoryId, @RequestParam String mainLink) throws IOException {
         List<TagDto> tags = new ArrayList<>();
-        return contentService.addNew(new ContentDto(0, title, description, null, new UserDto(), new CategoryDto(), new ExternalResourcesDto(), tags), userId, categoryId);
+        return contentService.addNew(new ContentDto(0, title, description, null, new UserDto(), new CategoryDto(), new ExternalResourcesDto(), tags), userId, categoryId, mainLink);
     }
 
     @PutMapping

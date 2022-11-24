@@ -3,8 +3,8 @@ package com.karalash.ukrcontent.controller;
 import com.karalash.ukrcontent.dto.UserDto;
 import com.karalash.ukrcontent.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -35,16 +35,18 @@ public class UserController {
         return userService.getAdmins();
     }
 
-    ///// to do
     @PostMapping("admin")
-    public UserDto addNewAdmin(@RequestBody @Validated UserDto user) {
-        return userService.addNewAdmin(user);
+    public UserDto addNewAdmin(@RequestParam String userName, @RequestParam String email,
+                               @RequestParam String password,
+                               @RequestParam(value = "file") MultipartFile avatar) {
+        return userService.addNewAdmin(new UserDto(0, userName, email, password, "", 1), avatar);
     }
 
-    ///// to do
     @PutMapping
-    public UserDto updateUser(@RequestBody @Validated UserDto user) {
-        return userService.updateUser(user);
+    public UserDto updateUser(@RequestParam int id, @RequestParam String userName, @RequestParam String email,
+                              @RequestParam String password,
+                              @RequestParam(value = "file") MultipartFile avatar) {
+        return userService.updateUser(new UserDto(id, userName, email, password, "", 0), avatar);
     }
 
     @DeleteMapping("{userId}")

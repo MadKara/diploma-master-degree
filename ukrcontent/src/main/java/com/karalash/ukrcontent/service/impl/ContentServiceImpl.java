@@ -1,6 +1,7 @@
 package com.karalash.ukrcontent.service.impl;
 
 import com.karalash.ukrcontent.dto.ContentDto;
+import com.karalash.ukrcontent.mapper.CategoryMapper;
 import com.karalash.ukrcontent.mapper.ContentMapper;
 import com.karalash.ukrcontent.model.entities.Category;
 import com.karalash.ukrcontent.model.entities.Content;
@@ -12,9 +13,10 @@ import com.karalash.ukrcontent.service.ContentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +26,8 @@ public class ContentServiceImpl implements ContentService {
     private final UserRepo userRepo;
     private final CategoryRepo categoryRepo;
     private final ContentMapper contentMapper;
+    private final CategoryMapper categoryMapper;
+    private final WordServiceImpl wordService;
 
     @Override
     public ContentDto getById(int id) {
@@ -69,20 +73,42 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public ContentDto addNew(ContentDto content, int userId, int categoryId) {
+    public ContentDto addNew(ContentDto content, int userId, Integer categoryId, String mainLink) throws IOException {
         Optional<User> userById = userRepo.findById(userId);
         if (userById.isEmpty()) {
             throw new IllegalArgumentException("Not found user with id: " + userId);
         }
-        Optional<Category> categoryById = categoryRepo.findById(categoryId);
-        if (categoryById.isEmpty()) {
-            throw new IllegalArgumentException("Not found category with id: " + userId);
+        Optional<Category> categoryById;
+        if (categoryId == null) {
+            var categories = categoryRepo.findAll();
+            var words = wordService.getMostRepeatedWords(mainLink);
+            Map<Integer, Integer> matches = new HashMap<>();
+            categories.forEach(category -> {
+                var count = category.getWords().stream().filter(word -> words.contains(word.getWord())).count();
+                matches.put(category.getId(), (int) count);
+            });
+            System.out.println(matches);
+//            var suitableCat = matches.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
+            var suitableCat = Collections.max(matches.entrySet(), Comparator.comparingInt(Map.Entry::getValue)).getKey();
+
+            if (suitableCat == 0){
+                categoryById = categoryRepo.findById(1);
+            } else {
+                categoryById = categoryRepo.findById(suitableCat);
+            }
+        } else {
+            categoryById = categoryRepo.findById(categoryId);
+            if (categoryById.isEmpty()) {
+                throw new IllegalArgumentException("Not found category with id: " + userId);
+            }
         }
+
         User userEntity = userById.get();
         Category categoryEntity = categoryById.get();
 
         content.getUser().setId(userEntity.getId());
-        content.getCategory().setId(categoryEntity.getId());
+        content.setCategory(categoryMapper.toDto(categoryEntity));
+        content.getExternalResources().setBrowseLink(mainLink);
 
         Content contentEntity = contentMapper.toEntity(content);
         contentEntity.setUser(userEntity);
@@ -110,5 +136,9 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public void deleteContent(int id) {
         contentRepo.deleteById(id);
+    }
+
+    private void identifiedLang() {
+
     }
 }

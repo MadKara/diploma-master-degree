@@ -13,6 +13,7 @@ public class ExternalResourcesMapper implements Mapper<ExternalResourcesDto, Ext
                 .id(input.getId())
                 .twitter(input.getTwitter())
                 .instagram(input.getInstagram())
+                .browseLink(input.getBrowseLink())
                 .build();
     }
 
@@ -22,6 +23,7 @@ public class ExternalResourcesMapper implements Mapper<ExternalResourcesDto, Ext
         entity.setId(input.getId());
         entity.setTwitter(input.getTwitter());
         entity.setInstagram(input.getInstagram());
+        entity.setBrowseLink(input.getBrowseLink());
         return entity;
     }
 }

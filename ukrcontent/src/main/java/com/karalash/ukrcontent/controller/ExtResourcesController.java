@@ -19,7 +19,8 @@ public class ExtResourcesController {
     }
 
     @PutMapping
-    public ExternalResourcesDto updateContentExtResources(@RequestParam String instagram, @RequestParam String twitter, @RequestParam int id) {
-        return externalResourcesService.updateExtResources(new ExternalResourcesDto(id, twitter, instagram));
+    public ExternalResourcesDto updateContentExtResources(@RequestParam String instagram, @RequestParam String twitter, @RequestParam int id,
+                                                          @RequestParam String mainLink) {
+        return externalResourcesService.updateExtResources(new ExternalResourcesDto(id, twitter, instagram, mainLink));
     }
 }

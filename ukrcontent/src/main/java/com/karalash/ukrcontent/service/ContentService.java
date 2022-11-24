@@ -2,6 +2,7 @@ package com.karalash.ukrcontent.service;
 
 import com.karalash.ukrcontent.dto.ContentDto;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ContentService {
@@ -17,7 +18,7 @@ public interface ContentService {
 
     ContentDto getByTitle(String title);
 
-    ContentDto addNew(ContentDto company, int userId, int categoryId);
+    ContentDto addNew(ContentDto company, int userId, Integer categoryId, String mainLink) throws IOException;
 
     ContentDto updateContent(ContentDto content);
 

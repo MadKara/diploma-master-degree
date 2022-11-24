@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExternalResourcesDto {
+public class WordsDto {
     private int id;
-    private String twitter;
-    private String instagram;
-    private String browseLink;
+    private String word;
 }

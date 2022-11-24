@@ -27,7 +27,7 @@ public class ExternalResources {
     private String tiktok;
 
     @Column(name = "browse_link")
-    private String browse_link;
+    private String browseLink;
 
     @OneToOne(fetch = FetchType.LAZY) //
     @MapsId

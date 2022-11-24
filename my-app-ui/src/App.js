@@ -12,7 +12,7 @@ function App() {
   return (
     <div>
       <Router>
-        <Header />
+        {/* <Header /> */}
         <Switch>
           <Route path='/auth' component={Main} />
           <Route path='/logIn' component={LogInForm} />

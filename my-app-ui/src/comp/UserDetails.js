@@ -65,7 +65,7 @@ class UserDetails extends Component {
                 <Link to={"/auth/add-content/" + this.state.user.id}>Add Content</Link>
 
                 <button className="delete" onClick={this.deleteElem}>Видалити</button>
-                <Link className="update" to={"/auth/items-update/" + this.state.user.id}>Оновити to do</Link>
+                <Link className="update" to={"/auth/profile-update/" + this.state.user.id}>Оновити профіль</Link>
             </div>
         );
     }

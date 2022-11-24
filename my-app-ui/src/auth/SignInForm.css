@@ -32,14 +32,14 @@ input.signin, select {
     cursor: pointer;
   }
 
-  ::placeholder {
+  /* ::placeholder {
     color: rgb(255, 255, 255);
     opacity: 1; 
   }
-  
-  input:hover {
+   */
+  /* input:hover {
     background-color: rgba(146,95,72,255);
-  }
+  } */
 
   button.myButton {
 	background-color:rgba(144,104,63,255);

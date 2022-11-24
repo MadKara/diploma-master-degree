@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import ContentEditor from './ContentEditor';
 import Categories from './Categories';
-import Content from './Content';
+import './Contents.css';
 import ContentsInfo from './ContentsInfo';
 // import TagsSearch from './TagsSearch';
 
@@ -61,7 +61,7 @@ class Contents extends Component {
             console.log("0")
             this.setState({ filteredItems: this.state.items })
         } else {
-            this.setState({selectedTag: true})
+            this.setState({ selectedTag: true })
             // console.log(this.state.selectedTag)
             let array = this.state.items.filter((item) => {
                 return item.tags.map((item) => item.id).includes(parseInt(e.target.value));
@@ -96,49 +96,43 @@ class Contents extends Component {
         let inc = 0;
         console.log(this.state.filteredItems)
         return (
-            <div className="mainDivType">
-                <div className="search-wrapper">
-                    <label htmlFor="search-form">
+            <div className='mainDivContents'>
+                <div className='divContents'>
+                    <div className="search-wrapper">
                         <input
-                            type="search"
-                            name="search-form"
-                            id="search-form"
-                            className="search-input"
+                            type="text"
+                            className="search-title-content"
                             placeholder="Search for..."
-                            // value={this.state.q}
-                            /*
-                            // set the value of our useState q
-                            //  anytime the user types in the search box
-                            */
                             onChange={this.handleSearch}
                         />
-                        <span className="sr-only">Search by title</span>
-                        <br />
-                        <p></p>
-                        {/* <TagsSearch items={this.state.filteredItems}/> */}
-                        <div>
-                            {
-                                this.state.tags.map(item => {
-                                    inc = inc + 1;
-                                    return <button key={item.id} value={item.id} onClick={this.handleTagChange}>{item.label}  </button>
-                                })
-                            }
-                            <button value={0} onClick={this.handleTagChange}>clear</button>
+                        {/* <span className="sr-only">Search by title</span> */}
+                        {/* <br />
+                        <p></p> */}
+                        <div className='seacrh-tags'>
+                            <span className="searchByTagsTitle">Search by tags</span>
+                            <div className='tags-input-container'>
+                                {
+                                    this.state.tags.map(item => {
+                                        inc = inc + 1;
+                                        return <button className='tag-item' key={item.id} value={item.id} onClick={this.handleTagChange}>{item.label}  </button>
+                                    })
+                                }
+                                <button className='clearTagsButton' value={0} onClick={this.handleTagChange}>Очистити</button>
+                            </div>
                         </div>
-                        <span className="sr-only">Search by tags</span>
-                    </label>
-                </div>
-                <div className="heade">Список content</div>
-                <table>
-                    <tbody>
-                        {
+
+
+                    </div>
+
+                    <div className='cardsInfo'>
+                        {this.state.filteredItems.length > 0 ? (
                             this.state.filteredItems.map(item => {
                                 inc = inc + 1;
                                 return <ContentsInfo item={item} key={item.id} key2={inc} />
-                            })
+                            })) : (<div className="noneContent">Нічого не знайдено</div>)
                         }
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
         );
     }

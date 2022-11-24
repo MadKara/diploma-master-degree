@@ -3,10 +3,10 @@ import "./Header.css"
 
 function Header() {
     return (
-        <div className="header">
-            <div className='title'>
+        <div className="nav">
+            {/* <div className='site-title'>
                 Master Diploma
-            </div>
+            </div> */}
         </div>
     );
 }

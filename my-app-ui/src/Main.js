@@ -14,6 +14,7 @@ import UserDetails from './comp/UserDetails';
 import NewContent from './comp/NewContent';
 import NewGallery from './comp/NewGallery';
 import Content from './comp/Content';
+import ProfileUpdate from './comp/ProfileUpdate';
 
 
 
@@ -90,23 +91,19 @@ function Main() {
   }
 
   return userInfo ? (
-    <div>
-      <div className="userInfo">
-        <img className="companyIcon" src={userInfo.avatarPath} alt="Icon of company" width="100" height="75"></img>
-        <Link className="userInfo" to={`${match.url}/user-details/` + userInfo.id}>{userInfo.firstName}<br></br>{userInfo.secondName}</Link>
-      </div>
-      <button className="logout" onClick={routeChange}>Вийти з системи</button>
-      <div className="links">
-        {/* <Link to={`${match.url}/categories/`}>categories </Link> */}
-        {/* <Link to={`${match.url}/contents/`}>contents </Link> */}
-        <Link to={`${match.url}/user-details/:Id`}>profile </Link>
-      </div>
-      <div>
-        <div>Categories</div>
-        <div>
-          <Categories/>
-          {/* <Route path="/contents/:category" element={<Contents />}/> */}
+    <div className='mainDiv'>
+      <div className="nav active">
+        <div className='site-title'>
+          Master Diploma
         </div>
+        <ul>
+          <img className="avatar" src={userInfo.avatarPath} alt="Icon of company" width="100" height="75"></img>
+          <Link className="toProfile" to={`${match.url}/user-details/` + userInfo.id}>{userInfo.userName}</Link>
+          <button className="logout" onClick={routeChange}>Вийти</button>
+        </ul>
+      </div>
+      <div className='mainCatDiv'>
+        <Categories />
       </div>
       <Switch>
         <Route path={`${match.url}/user-details/:Id`} component={UserDetails} />
@@ -119,6 +116,7 @@ function Main() {
         <Route path={`${match.url}/add-content/:Id`} component={NewContent} />
         <Route path={`${match.url}/add-gallery-content/:title`} component={NewGallery} />
         <Route path={`${match.url}/content/:Id`} component={Content} />
+        <Route path={`${match.url}/profile-update/:Id`} component={ProfileUpdate} />
         {/* <Route path={`${match.url}/comapnies-create/`} component={NewCompany} />
         <Route path={`${match.url}/admins-details/:Id`} component={UserDetails} />
         <Route path={`${match.url}/admins/`} component={Admins} />
@@ -127,6 +125,9 @@ function Main() {
         <Route path={`${match.url}/users-create/`} component={() => <NewUser userType={1} />} />
         <Route path={`/auth`} component={Common} /> */}
       </Switch>
+      <div class="footer">
+        <h2>Footer</h2>
+      </div>
     </div>
   ) : (
     <div>

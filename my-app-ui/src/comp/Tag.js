@@ -6,11 +6,7 @@ const Tag = (props) => {
   // console.log(item)
 
   return (
-    <li>
-      <span className="text">{item.label}</span>
-      {/* <span className="text">&times;</span> */}
-      {/* <span className="close" onClick={item.removeTag}>&times;</span> */}
-    </li>
+      <span className="tagsInfo">#{item.label}</span>
   );
 };
 

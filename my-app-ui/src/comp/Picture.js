@@ -5,9 +5,11 @@ const Picture = (props) => {
   // console.log(item)
 
   return (
-    <section>
+    <div>
+      {/* <div class="numberOgImgInfo">{item.key} / 3</div> */}
       <img src={item.imgPath} width="100" alt="imgPath" />
-    </section>
+      {/* <div class="imgInfoCaption">Gallery</div> */}
+    </div>
   );
 };
 

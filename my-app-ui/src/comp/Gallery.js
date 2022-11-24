@@ -5,13 +5,15 @@ import Cookies from 'universal-cookie';
 import Content from './ContentEditor';
 import Categories from './Categories';
 import Picture from './Picture';
+import ImgView from './ImgView';
 
 class Gallery extends Component {
 
     constructor() {
         super();
         this.state = {
-            images: []
+            images: [],
+            slideIndex: 1
         };
     }
 
@@ -36,19 +38,11 @@ class Gallery extends Component {
     render() {
         let inc = 0;
         return (
-            <div className="mainDivType">
-                <div className="heade">Gallery</div>
-                <table>
-                    <tbody>
-                        {
-                            this.state.images.map(item => {
-                                inc = inc + 1;
-                                return <Picture item={item} key={item.id} key2={inc} />
-                            })
-                        }
-                    </tbody>
-                </table>
-            </div>
+            // <div className="mainDivType">
+                
+                    <ImgView item={this.state.images}/>
+                
+            // </div>
         );
     }
 

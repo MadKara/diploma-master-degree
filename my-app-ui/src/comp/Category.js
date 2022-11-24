@@ -2,20 +2,16 @@ import React from 'react';
 import { NotificationManager } from 'react-notifications';
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-// import './Company.css'
+import './Categories.css'
 
 function Category(props) {
     const item = props.item;
     
     return (
-        <tr className= "company">
-            <td>{props.key2} </td>
-            {/* <td><img src={item.logoPath} alt="Icon of item" width="100" height="75"></img></td> */}
-            {/* <td><a className="des" href={'http://localhost:8080/service-api/contents/?categoryName=' + this.props.category.name}>{item.name}</a></td> */}
-            {/* <td><button className="t" onClick={() => deleteElem(item.id, item.name)}><img src="https://res.cloudinary.com/elatof/image/upload/v1667146600/treatment-weather/delete_xc0dvw.png" alt="Login logo" width="20" height="20"></img></button></td> */}
-            <td><Link to={"/auth/contents/"+item.name} onClick={() => window.location.href="/auth/contents/"+item.name} >{item.name}</Link></td>
+        // <tr className= "company">
+           <Link id='navItems' to={"/auth/contents/"+item.name} onClick={() => window.location.href="/auth/contents/"+item.name} >{item.name}</Link>
             
-        </tr>
+        // </tr>
     );
 }
 

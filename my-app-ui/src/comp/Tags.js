@@ -66,21 +66,13 @@ class Tags extends Component {
 
         return (
             <div className="input-tag">
-                <p> Tags </p>
                 <div>
-                    <ul className="input-tag__tags">
                         {this.state.tags.map((tag, i) => (
-                            <div key={i}>
                                 <Tag item={tag} key={i}/>
-                                {/* console.log(i) */}
-                                {/* <li key={tag}>
-                                {tag}
-                                <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
-                            </li> */}
-                            </div>
+                                
                         ))}
                         {/* <li className="input-tag__tags__input"><input type="text" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li> */}
-                    </ul>
+                   
                 </div>
             </div>
         );

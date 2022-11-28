@@ -13,5 +13,8 @@ public class ExternalResourcesDto {
     private int id;
     private String twitter;
     private String instagram;
+    private String tiktok;
+    private String telegram;
+    private String youtube;
     private String browseLink;
 }

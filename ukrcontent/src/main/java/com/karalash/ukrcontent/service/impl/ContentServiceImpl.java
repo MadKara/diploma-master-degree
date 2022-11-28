@@ -1,13 +1,16 @@
 package com.karalash.ukrcontent.service.impl;
 
 import com.karalash.ukrcontent.dto.ContentDto;
+import com.karalash.ukrcontent.dto.TagDto;
 import com.karalash.ukrcontent.mapper.CategoryMapper;
 import com.karalash.ukrcontent.mapper.ContentMapper;
 import com.karalash.ukrcontent.model.entities.Category;
 import com.karalash.ukrcontent.model.entities.Content;
+import com.karalash.ukrcontent.model.entities.Tag;
 import com.karalash.ukrcontent.model.entities.User;
 import com.karalash.ukrcontent.repos.CategoryRepo;
 import com.karalash.ukrcontent.repos.ContentRepo;
+import com.karalash.ukrcontent.repos.TagRepo;
 import com.karalash.ukrcontent.repos.UserRepo;
 import com.karalash.ukrcontent.service.ContentService;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +28,11 @@ public class ContentServiceImpl implements ContentService {
     private final ContentRepo contentRepo;
     private final UserRepo userRepo;
     private final CategoryRepo categoryRepo;
+    private final TagRepo tagRepo;
     private final ContentMapper contentMapper;
     private final CategoryMapper categoryMapper;
     private final WordServiceImpl wordService;
+    private final TagServiceImpl tagService;
 
     @Override
     public ContentDto getById(int id) {
@@ -88,10 +93,9 @@ public class ContentServiceImpl implements ContentService {
                 matches.put(category.getId(), (int) count);
             });
             System.out.println(matches);
-//            var suitableCat = matches.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
             var suitableCat = Collections.max(matches.entrySet(), Comparator.comparingInt(Map.Entry::getValue)).getKey();
 
-            if (suitableCat == 0){
+            if (suitableCat == 0) {
                 categoryById = categoryRepo.findById(1);
             } else {
                 categoryById = categoryRepo.findById(suitableCat);
@@ -115,7 +119,24 @@ public class ContentServiceImpl implements ContentService {
         contentEntity.setCategory(categoryEntity);
         contentEntity.setDateTime(new Timestamp(System.currentTimeMillis()));
         contentRepo.save(contentEntity);
+        addMostRepeatedWordsAsTags(wordService.getMostRepeatedWords(mainLink), contentMapper.toDto(contentRepo.findByTitle(content.getTitle())));
         return contentMapper.toDto(contentEntity);
+    }
+
+    private void addMostRepeatedWordsAsTags(List<String> words, ContentDto content) {
+        var tags = tagRepo.findAll();
+        var tagsTitles = tags.stream().map(Tag::getLabel).collect(Collectors.toList());
+        var ww = words.stream().limit(7).collect(Collectors.toList());
+        ww.forEach(word -> {
+            if (tagsTitles.contains(word)) {
+                var label = tagsTitles.stream().filter(s -> s.equals(word)).findFirst().orElse(null);
+                var tt = tagRepo.findByLabel(label);
+                tagService.addTagToContent(content.getId(), tt.getId());
+            } else {
+                TagDto newTag = new TagDto(0, word);
+                tagService.createAndAddNewTagToContent(newTag, content.getId());
+            }
+        });
     }
 
     @Override
@@ -136,9 +157,5 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public void deleteContent(int id) {
         contentRepo.deleteById(id);
-    }
-
-    private void identifiedLang() {
-
     }
 }

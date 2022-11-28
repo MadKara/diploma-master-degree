@@ -1,6 +1,7 @@
 package com.karalash.ukrcontent.model.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -8,6 +9,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "comment")
 @Data
+@ToString(exclude = {"content"})
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface TagRepo extends JpaRepository<Tag, Integer> {
     List<Tag> findAllByContents_Id(int contentId);
+
+    Tag findByLabel(String label);
 }

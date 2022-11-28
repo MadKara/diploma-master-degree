@@ -1,5 +1,6 @@
 package com.karalash.ukrcontent.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.sql.Timestamp;
 public class CommentDto {
     private int id;
     private String message;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
     private Timestamp dateTime;
     private UserDto user;
     private ContentDto content;

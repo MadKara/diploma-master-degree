@@ -38,7 +38,7 @@ public class Content {
     @OneToMany(mappedBy = "content") //orphanRemoval = true
     private Set<Gallery> images = new HashSet<>();
 
-    @OneToMany(mappedBy = "content") //orphanRemoval = true
+    @OneToMany(mappedBy = "content", orphanRemoval = true) //orphanRemoval = true
     private Set<Comment> comments = new HashSet<>();
 
     @OneToOne(mappedBy = "content", cascade = CascadeType.ALL)
@@ -59,16 +59,4 @@ public class Content {
         this.externalResources = externalResources;
         this.externalResources.setContent(this); // setting the parent class as the value for the child instance
     }
-
-//    public Content(int id, String title, String description, Timestamp dateTime, User user, Category category, Set<Gallery> images, Set<Comment> comments, ExternalResources externalResources) {
-//        this.id = id;
-//        this.title = title;
-//        this.description = description;
-//        this.dateTime = dateTime;
-//        this.user = user;
-//        this.category = category;
-//        this.images = images;
-//        this.comments = comments;
-//        this.externalResources = externalResources;
-//    }
 }

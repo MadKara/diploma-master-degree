@@ -17,12 +17,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,12 +52,7 @@ public class WordServiceImpl implements WordService {
         long time = System.currentTimeMillis();
 
         Map<String, Word> countMap = new HashMap<String, Word>();
-
-        //connect to wikipedia and get the HTML
-        System.out.println("Downloading page...");
         Document doc = Jsoup.connect(htmlPage).get();
-
-        //Get the actual text from the page, excluding the HTML
         String text = doc.body().text();
 
         //load all languages:
@@ -73,26 +66,19 @@ public class WordServiceImpl implements WordService {
         //query:
         TextObject textObject = textObjectFactory.forText(text);
         Optional<LdLocale> lang = languageDetector.detect(textObject);
-        System.out.println(lang);
-        if(lang.isPresent()) {
-            if(!lang.get().getLanguage().equals("uk")) {
+        if (lang.isPresent()) {
+            if (!lang.get().getLanguage().equals("uk")) {
                 throw new IllegalArgumentException("Not soloviina");
             }
         } else {
             throw new IllegalArgumentException("Lang is not found");
         }
 
-        System.out.println("Analyzing text...");
-        //Create BufferedReader so the words can be counted
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8))));
-        String line;
-//        while ((line = reader.readLine()) != null) {
         String[] words = text.split(" ");
         for (String word : words) {
             if (word.length() < 4) {
                 continue;
             }
-
             Word wordObj = countMap.get(word);
             if (wordObj == null) {
                 wordObj = new Word();
@@ -100,15 +86,10 @@ public class WordServiceImpl implements WordService {
                 wordObj.count = 0;
                 countMap.put(word, wordObj);
             }
-
             wordObj.count++;
         }
-//        }
 
-//        reader.close();
         List<Word> sortedWords = countMap.values().stream().sorted().limit(20).collect(Collectors.toList());
-//        SortedSet<Word> sortedWords = new TreeSet<Word>(countMap.values());
-
 
         for (Word word : sortedWords) {
             System.out.println(word.count + "\t" + word.word);

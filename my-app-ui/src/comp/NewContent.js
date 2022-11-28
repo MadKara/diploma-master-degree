@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { NotificationManager } from 'react-notifications';
 import Dropdown from 'react-dropdown';
 import { withRouter } from "react-router-dom";
-// import 'react-dropdown/style.css';
 import Cookies from 'universal-cookie';
-import { Link } from 'react-router-dom';
-
 
 class NewContent extends Component {
     constructor() {
@@ -36,28 +33,18 @@ class NewContent extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        //console.log(this.state.content.category.id)
+        const Id = this.props.match.params.Id;
+        let url;
         if (this.state.content.category === undefined) {
-            NotificationManager.warning("Ви обов'язково маєте вибрати category!");
-            return;
+            url = `http://localhost:8080/service-api/contents/?title=${this.state.content.title}&description=${this.state.content.description}&userId=${Id}&mainLink=${this.state.content.browseLink}`;
+        } else {
+            url = `http://localhost:8080/service-api/contents/?title=${this.state.content.title}&description=${this.state.content.description}&userId=${Id}&categoryId=${this.state.content.category.id}&mainLink=${this.state.content.browseLink}`;
         }
 
-        // let userType = this.props.userType;
-        //let url = "http://localhost:8080/service-api/contents/";
-        // this.state.content.isAdmin = userType;
-        // if (userType === 2) { //Admin
-        //     url = url + `admin`;
-        // }
-        const Id = this.props.match.params.Id;
-        console.log(Id)
-        let status;
-
-        fetch(`http://localhost:8080/service-api/contents/?title=${this.state.content.title}&description=${this.state.content.description}&userId=${Id}&categoryId=${this.state.content.category.id}`, {
+        fetch(url, {
             method: "POST",
-            // body: form_data,
             headers: {
-                "Authorization": "Bearer " + new Cookies().get('token'),
-                // "content-type": "application/json"
+                "Authorization": "Bearer " + new Cookies().get('token')
             }
         }).then(function (response) {
             if (response.status === 500) {
@@ -67,50 +54,37 @@ class NewContent extends Component {
                 NotificationManager.warning('Помилка вхідних даних, повторіть спробу.');
             }
             if (response.status === 200) {
-                NotificationManager.success('Новий користувач добавленний');
+                NotificationManager.success('Новий контент добавлено');
             }
         }).catch(function () {
             NotificationManager.error('Помилка сервера');
         });
-
-        // .then(data => {
-        //     if (status === 200) {
-        //         console.log("history push")
-        //         const { history } = this.props;
-        //         history.push("/auth/contents-user/" + Id);
-        //     }
-        // })
-        // this.props.history.push("/auth/add-gallery-content/" + this.state.title)
-    }
+}
 
     render() {
-        // console.log(this.state.content)
         let categoryNames = this.state.categories.map((category) => { return category.name });
         let handleCategory = (e) => {
             let handleCategory;
             this.state.categories.forEach((category) => { if (e.value === category.name) handleCategory = category; });
             this.state.content.category = handleCategory;
-            console.log(this.state.content.category)
-
         }
 
         return (
-            <div className="newItem">
+            <div>
                 <form onSubmit={this.onSubmit}>
-                    <b>Створення нового content</b>
+                    <b>Створення нового контенту</b>
                     <p />
-                    <input className="newItem" type="text" id="title" required={true} placeholder="Введіть title" name="title" onChange={(e) => this.state.content.title = e.target.value} />
+                    <input type="text" id="title" required={true} placeholder="Введіть назву" name="title" onChange={(e) => this.state.content.title = e.target.value} />
                     <p />
-                    <input className="newItem" type="text" id="description" required={true} placeholder="Введіть description" name="description" onChange={(e) => this.state.content.description = e.target.value} />
+                    <input type="text" id="description" required={true} placeholder="Введіть опис" name="description" onChange={(e) => this.state.content.description = e.target.value} />
                     <p />
-                    <Dropdown className="dropDown" options={categoryNames} onChange={handleCategory} placeholder="Виберіть category" />
+                    <Dropdown options={categoryNames} onChange={handleCategory} placeholder="Оберіть категорію" />
+                    <p />
+                    <input type="text" id="browseLink" required={true} placeholder="Введіть основне посилання" name="browseLink" onChange={(e) => this.state.content.browseLink = e.target.value} />
                     <p />
                     <p />
-                    <button className='myButton' onClick={() => window.location.href="/auth/add-gallery-content/" + this.state.content.title}>Підтвердити добавлення</button>
-                    {/* <Link to={"/add-gallery-content/" + this.state.title}></Link> */}
-
-                    {/* <Link to={"/auth/add-info-content/" + this.state.content.title} onClick={this.onSubmit}>Save Main Info</Link> */}
-                </form>
+                    <button onClick={() => window.location.href="/auth/add-gallery-content/" + this.state.content.title}>Підтвердити добавлення</button>
+                    </form>
             </div>
         );
     }

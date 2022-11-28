@@ -1,13 +1,7 @@
 import React, { Component, useState, useMemo, useEffect } from 'react';
-import { NotificationManager } from 'react-notifications';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import ContentEditor from './ContentEditor';
-import Categories from './Categories';
 import './Contents.css';
 import ContentsInfo from './ContentsInfo';
-// import TagsSearch from './TagsSearch';
 
 class Contents extends Component {
 
@@ -23,7 +17,6 @@ class Contents extends Component {
 
         this.handleSearch = this.handleSearch.bind(this)
         this.handleSearchValue = this.handleSearchValue.bind(this)
-        // this.handleSelectedTag = this.handleSelectedTag.bind(this)
         this.handleTagChange = this.handleTagChange.bind(this)
     }
 
@@ -42,17 +35,7 @@ class Contents extends Component {
         console.log(this.state.filteredItems)
     }
 
-    // handleSelectedTag(e) {
-    //     this.setState({ selectedTag: e.target.value })
-    // }
-
     handleTagChange(e) {
-        // this.handleSelectedTag(e)
-        // this.setState({ selectedTag: e.target.value });
-        // console.log(parseInt(e.target.value))
-        // console.log(this.state.selectedTag)
-        // let initialItems = this.state.filteredItems
-
         this.setState({ filteredItems: this.state.items })
         let tagId = e.target.value
         console.log(tagId)
@@ -62,7 +45,6 @@ class Contents extends Component {
             this.setState({ filteredItems: this.state.items })
         } else {
             this.setState({ selectedTag: true })
-            // console.log(this.state.selectedTag)
             let array = this.state.items.filter((item) => {
                 return item.tags.map((item) => item.id).includes(parseInt(e.target.value));
             });
@@ -105,25 +87,19 @@ class Contents extends Component {
                             placeholder="Search for..."
                             onChange={this.handleSearch}
                         />
-                        {/* <span className="sr-only">Search by title</span> */}
-                        {/* <br />
-                        <p></p> */}
                         <div className='seacrh-tags'>
                             <span className="searchByTagsTitle">Search by tags</span>
                             <div className='tags-input-container'>
                                 {
                                     this.state.tags.map(item => {
                                         inc = inc + 1;
-                                        return <button className='tag-item' key={item.id} value={item.id} onClick={this.handleTagChange}>{item.label}  </button>
+                                        return <button className='tag-item' key={item.id} value={item.id} onClick={this.handleTagChange}>#{item.label}  </button>
                                     })
                                 }
                                 <button className='clearTagsButton' value={0} onClick={this.handleTagChange}>Очистити</button>
                             </div>
                         </div>
-
-
                     </div>
-
                     <div className='cardsInfo'>
                         {this.state.filteredItems.length > 0 ? (
                             this.state.filteredItems.map(item => {

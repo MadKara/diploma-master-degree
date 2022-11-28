@@ -1,12 +1,10 @@
-/* .mainDivContents {
-    align-self: stretch;
-} */
-.mainDivContents {   
-    -ms-flex: 80%; /* IE10 */
+.mainDivContents {
+    -ms-flex: 80%;
+    /* IE10 */
     flex: 80%;
     background-color: white;
     padding: 20px;
-  }
+}
 
 .search-title-content {
     padding: 10px;
@@ -14,21 +12,17 @@
 
 .searchByTagsTitle {
     font-style: italic;
-
 }
 
 .search-wrapper {
     display: flex;
     flex-direction: column;
-    /* flex: 1; */
     align-items: center;
-    /* gap: 2px; */
     padding-bottom: 10px;
 }
 
 input.search-title-content[type=text] {
     padding: 10px;
-    /* margin: 25px 50px 25px 50px; */
     margin-top: 10px;
     font-size: 17px;
     border: 1px solid grey;
@@ -73,16 +67,28 @@ input.search-title-content[type=text]:focus {
     flex-direction: row;
     flex: 1;
     flex-wrap: wrap;
-    /* width: 500px;
-    height: 400px; */
     row-gap: 10px;
     column-gap: 10px;
-    /* align-content: start; */
 }
 
-/* .divContents{
-    flex-basis: 25%;
-} */
+.mainCatDiv {
+    -ms-flex: 20%;
+    /* IE10 */
+    flex: 20%;
+    background-color: #f1f1f1;
+    padding: 20px;
+    min-height: 100vh;
+    max-width: 20%;
+}
+
+.mainDiv {
+    display: -ms-flexbox;
+    /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap;
+    /* IE10 */
+    flex-wrap: wrap;
+}
 
 .mainDivContents {
     width: -webkit-calc(100% - 270px);

@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 import { NotificationManager } from 'react-notifications';
-import Dropdown from 'react-dropdown';
-import { withRouter } from "react-router-dom";
-// import 'react-dropdown/style.css';
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
-import ReactDropdown from 'react-dropdown';
-import Dropzone from 'react-dropzone'
-import ExtResourcesUpdate from './ExtResourcesUpdate';
 import AddTag from './AddTag';
-// import ImageUploading from "react-images-uploading";
-// import ImageUploader from './ImageUploader';
 
 
 class NewGallery extends Component {
@@ -30,24 +22,20 @@ class NewGallery extends Component {
         let cookie = new Cookies();
         let initialItems = [];
         const title = this.props.match.params.title;
-        // console.log(title)
 
         fetch(`http://localhost:8080/service-api/contents/title/${title}`, {
         })
-        .then(response => {
-            return response.json();
-        }).then(data => {
-            initialItems = data;
-            // console.log(initialItems)
-            this.setState({content: initialItems});
-        });
-        // console.log(this.state.content)
+            .then(response => {
+                return response.json();
+            }).then(data => {
+                initialItems = data;
+                this.setState({ content: initialItems });
+                console.log(this.state.content)
+            });
     }
 
     handleImages = (e) => {
-        console.log(e.target.files)
         this.setState({ images: e.target.files });
-        // console.log(this.state.images)
     }
 
     onSubmit(e) {
@@ -56,21 +44,14 @@ class NewGallery extends Component {
             NotificationManager.warning("Потрібно обрати бодай одне фото!");
             return;
         }
-        console.log(this.state.images)
-
-        // const title = this.props.match.params.title;
         let form_data = new FormData();
         Array.from(this.state.images).forEach((image) => form_data.append('files', image))
-        // form_data.append('files', this.state.images);
-        
-        console.log(form_data)
 
         fetch(`http://localhost:8080/service-api/contents/gallery/?contentId=${this.state.content.id}`, {
             method: "POST",
             body: form_data,
             headers: {
-                "Authorization": "Bearer " + new Cookies().get('token'),
-                // "content-type": "application/json"
+                "Authorization": "Bearer " + new Cookies().get('token')
             }
         }).then(function (response) {
             if (response.status === 500) {
@@ -88,34 +69,26 @@ class NewGallery extends Component {
     }
 
     render() {
-        // console.log(this.state.content)
-        // let categoryNames = this.state.categories.map((category) => { return category.name });
-        // let handleCategory = (e) => {
-        //     let handleCategory;
-        //     this.state.categories.forEach((category) => { if (e.value === category.name) handleCategory = category; });
-        //     this.state.content.category = handleCategory;
-        //     console.log(this.state.content.category)
-
-        // }
-        console.log(this.state.content.id)
+        let Id = this.state.content.id
+        console.log(Id)
         return (
-            <div className="newItem">
+            <div>
                 <form onSubmit={this.onSubmit}>
-                    <b>Створення нового content</b>
+                    <b>Продовження створення</b>
+                    <p />
                     <input id='fileUpload' type='file' multiple
                         accept='image/png, image/jpeg'
                         onChange={this.handleImages}
                     />
-                    {/* <Dropdown className="dropDown" options={categoryNames} onChange={handleCategory} placeholder="Виберіть category" /> */}
+                    <button >Добавити картинки</button>
                     <p />
-                    <p />
-                    <Link to={"/auth/add-ext-resources/" + this.state.content.id} >Add Ext Res</Link>
+                    <Link to={"/auth/add-ext-resources/" + this.state.content.id} >Добавити додаткові зовнішні посилання</Link>
                     <p></p>
                     <div>
-                        <AddTag Id={this.state.content.id}/>
+                        Запропоновані теги:
+                        <AddTag Id={this.state.content.id} />
                     </div>
-                    <button className='myButton' >Добавити картинки</button>
-                    <button className='myButton' onClick={() => window.location.href="/auth/contents-user/" + this.state.content.user.id} >Перейти до створених контентів</button>
+                    <button onClick={() => window.location.href = "/auth/contents-user/" + this.state.content.user.id} >Переглянути створений контент</button>
                 </form>
             </div>
         );

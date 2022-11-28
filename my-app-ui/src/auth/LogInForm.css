@@ -1,67 +1,50 @@
-div.login{
-    color: rgba(144,104,63,255);
-    text-align: center;
-    background-color: rgba(49,51,50,255);
-    border-style: solid;
-    border-color: rgba(144,104,63,255);
+body {
+  background-color: #04AA6D;
 }
 
-span.info{
+/* Bordered form */
+.logInForm {
+  border: 3px solid #f1f1f1;
+}
+
+.title {
+  margin: 10px;
+}
+
+.container {
+  position: absolute;
+  right: 0;
+  margin: 100px;
+  height: 50%;
+  width: 300px;
+  padding: 16px;
+  background-color: white;
+}
+
+/* Full-width inputs */
+.logInInput[type=text],
+.logInInput[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+/* Set a style for all buttons */
+.logInButton {
+  background-color: #04AA6D;
   color: white;
-  font-size: 0.95em;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
 }
 
-input.login, select {
-    width: 15%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid rgb(255, 255, 255);
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  input.login{
-    width: 15%;
-    background-color: rgba(143,102,61,255);
-    color: rgb(255, 255, 255);
-    padding: 10px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  /* ::placeholder {
-    color: rgb(255, 255, 255);
-    opacity: 1; 
-  } */
-  
-  /* input:hover {
-    background-color: rgba(146,95,72,255);
-  } */
-
-  button.myButton {
-	background-color:rgba(144,104,63,255);
-	-moz-border-radius:20px;
-	-webkit-border-radius:20px;
-	border-radius:28px;
-	border:1px solid lightblue;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:13px;
-	padding:10px 25px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
+/* Add a hover effect for buttons */
+.logInButton:hover {
+  opacity: 0.8;
 }
-button.myButton:hover {
-	background-color:rgba(146,95,72,255);
-}
-button.myButton:active {
-	position:relative;
-	top:1px;
-}
-
-  

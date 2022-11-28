@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { NotificationManager } from 'react-notifications';
-import Dropdown from 'react-dropdown';
-import { withRouter } from "react-router-dom";
-// import 'react-dropdown/style.css';
 import Cookies from 'universal-cookie';
-import { Link } from 'react-router-dom';
 import './Comment.css'
 
 
@@ -20,21 +16,6 @@ class CommentEditor extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    // componentDidMount() {
-    //     let cookie = new Cookies();
-    //     let initialItems = [];
-    //     fetch(`http://localhost:8080/service-api/categories/`, {
-    //         // headers: {
-    //         //     "Authorization": "Bearer " + cookie.get('token')
-    //         // }
-    //     }).then(response => { return response.json(); })
-    //         .then(data => {
-    //             initialItems = data.map((Item) => { return Item });
-    //             this.setState({ categories: initialItems });
-    //             console.log(this.state.categories)
-    //         });
-    // }
-
     onSubmit(e) {
         e.preventDefault();
 
@@ -46,10 +27,8 @@ class CommentEditor extends Component {
 
         fetch(`http://localhost:8080/service-api/comments/?message=${this.state.message}&userId=${userId}&contentId=${contentId}`, {
             method: "POST",
-            // body: form_data,
             headers: {
-                "Authorization": "Bearer " + new Cookies().get('token'),
-                // "content-type": "application/json"
+                "Authorization": "Bearer " + new Cookies().get('token')
             }
         }).then(function (response) {
             if (response.status === 500) {
@@ -59,7 +38,7 @@ class CommentEditor extends Component {
                 NotificationManager.warning('Помилка вхідних даних, повторіть спробу.');
             }
             if (response.status === 200) {
-                NotificationManager.success('Новий користувач добавленний');
+                NotificationManager.success('Новий коментар добавленний');
             }
         }).catch(function () {
             NotificationManager.error('Помилка сервера');
@@ -72,11 +51,8 @@ class CommentEditor extends Component {
         return (
             <div className="formAddComment">
                 <form onSubmit={this.onSubmit}>
-                    {/* <b>Створення нового comment</b> */}
-                    
-                    <input className='commentInput' type="text" id="message" required={true} placeholder="Введіть message" name="message" onChange={(e) => this.state.message = e.target.value} />
-                    
-                    <button className='commentButton'>Підтвердити добавлення</button>
+                    <input className='commentInput' type="text" required={true} placeholder="Введіть коментар" name="message" onChange={(e) => this.state.message = e.target.value} />
+                    <button className='commentButton'>Надіслати</button>
                </form>
             </div>
         );

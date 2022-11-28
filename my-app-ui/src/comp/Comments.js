@@ -1,7 +1,5 @@
 import React, { Component, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import Category from './Category';
 import Comment from './Comment';
 import CommentEditor from './CommentEditor';
 import './Comment.css'
@@ -37,17 +35,12 @@ class Comments extends Component {
         return (
             <div className="mainDivType">
                 <div className="commSection">Comment section</div>
-                {/* <table>
-                    <tbody> */}
                         {
                             this.state.comments.map(item => {
                                 inc = inc + 1;
                                 return <Comment item={item} key={item.id} key2={inc} />
                             })
                         }
-                    {/* </tbody>
-                </table> */}
-                
                 {<CommentEditor contentId={this.props.contentId} userId={this.props.userId} />}
             </div>
         );

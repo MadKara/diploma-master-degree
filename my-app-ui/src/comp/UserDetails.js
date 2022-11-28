@@ -44,28 +44,21 @@ class UserDetails extends Component {
                     NotificationManager.success('Успішне видалення');
                 }
             });
-            this.props.history.push('/auth');
+            this.props.history.push('/auth'); ///--todo
         }
     }
-
-
 
     render() {
         console.log(this.state.user.id);
         return (
-            <div className="mainDivDetailsItem">
-
-                <b>Користувач</b><br />
-                <b>Ім'я: </b>{this.state.user.userName}<br />
-                <b>Поштова скринька: </b>{this.state.user.email}<br />
-                <b>День народження: </b>{this.state.user.password}<br />
-                <img src={this.state.user.avatarPath} alt="User's avatar" width="100" height="75"></img>
-                <b>Content by userId </b>{this.state.user.id}<br />
-                <Link to={"/auth/contents-user/" + this.state.user.id}>Users Contents</Link>
-                <Link to={"/auth/add-content/" + this.state.user.id}>Add Content</Link>
-
-                <button className="delete" onClick={this.deleteElem}>Видалити</button>
+            <div>
+                <img src={this.state.user.avatarPath} alt="Avatar" width='20%'></img>
+                <p>Користувач: {this.state.user.userName}</p>
+                <p>email: {this.state.user.email}</p>
+                <p>password: {this.state.user.password}</p>
                 <Link className="update" to={"/auth/profile-update/" + this.state.user.id}>Оновити профіль</Link>
+                <button className="delete" onClick={this.deleteElem}>Видалити профіль</button>
+                <Link to={"/auth/contents-user/" + this.state.user.id}>Переглянути створений контент</Link>
             </div>
         );
     }

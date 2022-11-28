@@ -63,21 +63,25 @@ class SignInForm extends Component {
     render() {
 
         return (
-            <div className="signin">
-                Рег
-                <form onSubmit={this.onSubmit}>
-                    <p />
-                    <input className="signin" type="text" id="userName" required={true} placeholder="Введіть username" name="userName" onChange={this.handleChange} />
-                    <p />
-                    <input className="signin" type="text" id="email" required={true} placeholder="Введіть email" name="email" onChange={this.handleChange} />
-                    <p />
-                    <input className="signin" type="password" id="password" required={true} placeholder="Введіть password" name="password" onChange={this.handleChange} />
-                    <p />
-                    <input className="signin" type="file" id="image" required={true} accept="image/png, image/jpeg" onChange={this.handleImageChange} />
-                    <p />
-                    <button className='myButton'>Підтвердити добавлення</button>
-                </form>
-                На цю сторінку вас автоматично переадресовує якщо:<span className="info">1. Ви не авторизовані 2. Час сесії сплив (1 год.)</span>
+            <div className="signUpContainer">
+                <div className='form'>
+                    <div className='signUpTitle'>SignUp</div>
+                    <form onSubmit={this.onSubmit}>
+                        <div className="imgContainer">
+                            <img src='stiker1.png' alt="WTF" className='signUpAvatar' />
+                        </div>
+                        <p />
+                        <input className="signUpInput" type="text" id="userName" required={true} placeholder="Введіть username" name="userName" onChange={this.handleChange} />
+                        <p />
+                        <input className="signUpInput" type="text" id="email" required={true} placeholder="Введіть email" name="email" onChange={this.handleChange} />
+                        <p />
+                        <input className="signUpInput" type="password" id="password" required={true} placeholder="Введіть password" name="password" onChange={this.handleChange} />
+                        <p />
+                        <input className="signin" type="file" id="image" required={true} accept="image/png, image/jpeg" onChange={this.handleImageChange} />
+                        <p />
+                        <button className='signUpButton'>Підтвердити добавлення</button>
+                    </form>
+                </div>
             </div>
         );
     }

@@ -1,5 +1,4 @@
 import React, { Component, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Category from './Category';
 import './Categories.css'

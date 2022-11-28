@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Tag from "./Tag";
 import Cookies from 'universal-cookie';
 import { NotificationManager } from 'react-notifications';
 
@@ -57,7 +56,7 @@ class AddTag extends Component {
                         NotificationManager.warning('Помилка вхідних даних, повторіть спробу.');
                     }
                     if (response.status === 200) {
-                        NotificationManager.success('Новий користувач добавленний');
+                        NotificationManager.success('Новий тег додано');
                     }
                 }).catch(function () {
                     NotificationManager.error('Помилка сервера');
@@ -76,7 +75,7 @@ class AddTag extends Component {
                         NotificationManager.warning('Помилка вхідних даних, повторіть спробу.');
                     }
                     if (response.status === 200) {
-                        NotificationManager.success('Новий користувач добавленний');
+                        NotificationManager.success('Новий тег додано');
                     }
                 }).catch(function () {
                     NotificationManager.error('Помилка сервера');
@@ -91,6 +90,8 @@ class AddTag extends Component {
         let initialItems1 = [];
         let initialItems2 = [];
         const Id = this.props.Id;
+        console.log(Id)
+        console.log(this.props)
 
         Promise.all([fetch(`http://localhost:8080/service-api/tags/content/${Id}`),
         fetch(`http://localhost:8080/service-api/tags/`)])
@@ -109,7 +110,6 @@ class AddTag extends Component {
     render() {
         return (
             <div className="input-tag">
-                <p> Tags </p>
                 <div>
                     <ul className="input-tag__tags">
                         {this.state.tagsByContentId.map((tag, i) => (
@@ -118,8 +118,8 @@ class AddTag extends Component {
                                 <button type="button" onClick={() => { this.removeTag(tag.id); }}>&times;</button>
                             </li>
                         ))}
-                        <li className="input-tag__tags__input"><input type="text" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li>
                     </ul>
+                    <input type="text" placeholder="Введіть тег" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} />
                 </div>
             </div>
         );

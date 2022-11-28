@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { NotificationManager } from 'react-notifications';
 import Cookies from 'universal-cookie';
-import { useRouteMatch, Link, Route, Switch, Redirect } from 'react-router-dom';
-import ExtResourcesUpdate from './ExtResourcesUpdate';
-import AddTag from './AddTag';
-// import ExtResModal from './ExtResModal'
 
 
 class ProfileUpdate extends Component {
@@ -64,10 +60,6 @@ class ProfileUpdate extends Component {
         console.log(form_data)
 
         let cookie = new Cookies();
-        // if (this.state.image != null) {
-        //     console.log("n");
-        //     form_data.append('file', this.state.image, this.state.image.name);
-        // }
 
         fetch(`http://localhost:8080/service-api/users/?email=${this.state.email}&userName=${this.state.userName}&password=${this.state.password}&id=${Id}`, {
             method: "PUT",
@@ -93,7 +85,7 @@ class ProfileUpdate extends Component {
     render() {
         console.log(this.state.image)
         return (
-            <div className="updateCustomer">
+            <div>
                 <form onSubmit={this.onSubmit}>
                     <b>Оновлення профілю</b>
                     <img src={this.state.avatarPath} alt="User's avatar" width="100" height="75"></img>
@@ -102,7 +94,6 @@ class ProfileUpdate extends Component {
                     <input type="text" id="username" placeholder="Enter userName" name="userName" value={this.state.userName} onChange={this.handleChange} />
                     <p></p>
                     email:
-                    {/* <img src={this.state.logoPath} alt="Icon of item" width="100" height="75"></img> */}
                     <input type="text" id="email" placeholder="Enter email" name="email" value={this.state.email} onChange={this.handleChange} />
                     <p></p>
                     password:
@@ -112,7 +103,7 @@ class ProfileUpdate extends Component {
                     change image
                     <input type="file" id="avatar" accept="image/png, image/jpeg" onChange={this.handleImageChange} />
                     <p></p>
-                    <button className='myButton'>Підтвердити оновлення</button>
+                    <button>Підтвердити оновлення</button>
                 </form>
             </div>
         );

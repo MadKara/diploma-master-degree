@@ -97,7 +97,7 @@ function Main() {
           Master Diploma
         </div>
         <ul>
-          <img className="avatar" src={userInfo.avatarPath} alt="Icon of company" width="100" height="75"></img>
+          <img className="navAvatar" src={userInfo.avatarPath} alt="Icon of company" width="100" height="75"></img>
           <Link className="toProfile" to={`${match.url}/user-details/` + userInfo.id}>{userInfo.userName}</Link>
           <button className="logout" onClick={routeChange}>Вийти</button>
         </ul>
@@ -117,13 +117,6 @@ function Main() {
         <Route path={`${match.url}/add-gallery-content/:title`} component={NewGallery} />
         <Route path={`${match.url}/content/:Id`} component={Content} />
         <Route path={`${match.url}/profile-update/:Id`} component={ProfileUpdate} />
-        {/* <Route path={`${match.url}/comapnies-create/`} component={NewCompany} />
-        <Route path={`${match.url}/admins-details/:Id`} component={UserDetails} />
-        <Route path={`${match.url}/admins/`} component={Admins} />
-        <Route path={`${match.url}/admins-create/`} component={() => <NewUser userType={2} />} />
-        <Route path={`${match.url}/users/`} component={Users} />
-        <Route path={`${match.url}/users-create/`} component={() => <NewUser userType={1} />} />
-        <Route path={`/auth`} component={Common} /> */}
       </Switch>
       <div class="footer">
         <h2>Footer</h2>

@@ -1,10 +1,7 @@
 import React, { Component, useState, useMemo, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import Content from './ContentEditor';
-import Categories from './Categories';
 import ContentEditor from './ContentEditor';
+import { Link } from 'react-router-dom';
 
 class ContentsByUserId extends Component {
 
@@ -27,18 +24,19 @@ class ContentsByUserId extends Component {
             //     "Authorization": "Bearer " + cookie.get('token')
             // }
         }).then(response => { return response.json(); })
-        .then(data => {
-            initialItems = data.map((Item) => { return Item });
-            this.setState({ items: initialItems });
-            console.log(this.state.items)
-        });
+            .then(data => {
+                initialItems = data.map((Item) => { return Item });
+                this.setState({ items: initialItems });
+                console.log(this.state.items)
+            });
     };
 
     render() {
         let inc = 0;
         return (
-            <div className="mainDivType">
-                <div className="heade">Список content bu user id</div>
+            <div>
+                <div>Список створеного контенту:</div>
+                <Link to={"/auth/add-content/" + this.props.match.params.Id}>Добавити новий контент</Link>
                 <table>
                     <tbody>
                         {

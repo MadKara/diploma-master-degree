@@ -1,18 +1,13 @@
 import React from 'react';
 import { NotificationManager } from 'react-notifications';
-import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import Gallery from './Gallery';
-import Tags from './Tags';
-// import './Company.css'
 
 function ContentDelete(props) {
 
     if (props.isAdmin === 1) {
         return (
-            <tr className="company">
+            <tr>
                 <td><button onClick={() => deleteElem(props.contentId, props.catname, props)}>Delete</button></td>
-                {/* <td><Link className="updateLink" to ={"/auth/company-update/" + item.id}>Змінити</Link></td> */}
             </tr>
         );
     } else {
@@ -43,10 +38,7 @@ let deleteElem = (id, catname, props) => {
         }).catch(function (error) {
             NotificationManager.error('Помилка сервера');
         });
-        // props.history.push('/auth');
-        // <Link to={"/auth/contents/" + catname}/>
     }
-
 }
 
 export default ContentDelete;

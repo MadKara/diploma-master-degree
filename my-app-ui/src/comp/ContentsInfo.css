@@ -1,20 +1,11 @@
 .contentInfoCard {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    /* max-width: 500px; */
-    /* margin: auto;    -----------*/
     text-align: center;
     width: 250px;
-    /* height: 400px; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 430px;
-    /* flex-wrap: wrap; */
-    /* grid-auto-columns: auto; */
-
-    /* flex: 1;
-    align-content: start; */
-
 }
 
 .title {
@@ -48,6 +39,5 @@
     padding: .5em .75em;
     border-radius: 20px;
     border: 1px solid #f76707;
-    /* height: 20px; */
     font-size: 12px;
 }

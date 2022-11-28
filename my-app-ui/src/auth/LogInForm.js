@@ -57,22 +57,14 @@ class LogInForm extends Component {
 
 
     render() {
-        
         return (
-            <div className="login">
-                Для подальшої роботи у системі потрібно ввести свої персональні дані
-                <form onSubmit={this.onSubmit}>
-                    <div>
-                        <input className="login" type="text" id="email" required={true} placeholder="Введіть email" name="email" onChange={this.handleChange} />
-                    </div>
-
-                    <div>
-                        <input className="login" type="password" id="password" required={true} placeholder="Введіть пароль" name="password" onChange={this.handleChange} />
-                    </div>
-
-                    <button className="myButton">Увійти</button>
+            <div className="container">
+                <div className='title'>Login</div>
+                <form className='logInForm' onSubmit={this.onSubmit}>
+                    <input className="logInInput" type="text" id="email" required={true} placeholder="Введіть email" name="email" onChange={this.handleChange} />
+                    <input className="logInInput" type="password" id="password" required={true} placeholder="Введіть пароль" name="password" onChange={this.handleChange} />
+                    <button className="logInButton">Увійти</button>
                 </form>
-                На цю сторінку вас автоматично переадресовує якщо:<span className="info">1. Ви не авторизовані 2. Час сесії сплив (1 год.)</span>
             </div>
         );
     }

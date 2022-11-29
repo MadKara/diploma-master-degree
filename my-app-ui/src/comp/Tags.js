@@ -1,5 +1,5 @@
+import Tag from "antd/es/tag";
 import React, { Component } from "react";
-import Tag from "./Tag";
 import Cookies from 'universal-cookie';
 
 class Tags extends Component {
@@ -40,7 +40,7 @@ class Tags extends Component {
             <div className="input-tag">
                 <div>
                     {this.state.tags.map((tag, i) => (
-                        <Tag item={tag} key={i} />
+                        <Tag key={i} >#{tag.label}</Tag>
                     ))}
                 </div>
             </div>

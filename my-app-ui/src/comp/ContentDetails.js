@@ -9,7 +9,7 @@ import ContentDelete from './ContentDelete';
 import './Content.css'
 import ExtRes from './ExtRes';
 
-class Content extends Component {
+class ContentDetails extends Component {
 
     constructor() {
         super();
@@ -95,4 +95,4 @@ class Content extends Component {
         );
     }
 }
-export default Content;
+export default ContentDetails;

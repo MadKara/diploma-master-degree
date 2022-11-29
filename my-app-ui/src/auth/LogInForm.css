@@ -1,50 +1,10 @@
 body {
-  background-color: #04AA6D;
+  background-color: #87e8de;
 }
 
-/* Bordered form */
-.logInForm {
-  border: 3px solid #f1f1f1;
-}
-
-.title {
-  margin: 10px;
-}
-
-.container {
-  position: absolute;
-  right: 0;
-  margin: 100px;
-  height: 50%;
-  width: 300px;
-  padding: 16px;
-  background-color: white;
-}
-
-/* Full-width inputs */
-.logInInput[type=text],
-.logInInput[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  padding: 16px;
-}
-
-/* Set a style for all buttons */
-.logInButton {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-/* Add a hover effect for buttons */
-.logInButton:hover {
-  opacity: 0.8;
+.login {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 100px;
 }

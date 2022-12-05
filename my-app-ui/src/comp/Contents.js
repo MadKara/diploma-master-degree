@@ -1,4 +1,5 @@
 import Card from "antd/es/card";
+import Empty from "antd/es/empty";
 import Search from "antd/es/input/Search";
 import Tag from "antd/es/tag";
 import CheckableTag from "antd/es/tag/CheckableTag";
@@ -61,7 +62,7 @@ class Contents extends Component {
 
   componentDidUpdate() {
     if (this.props.match.params.catname !== this.state.categoryName) {
-      this.setState({ categoryName: this.props.match.params.catname});
+      this.setState({ categoryName: this.props.match.params.catname });
 
       this.loadContent(this.props.match.params.catname);
     }
@@ -96,10 +97,9 @@ class Contents extends Component {
 
   componentDidMount() {
     const cat = this.props.match.params.catname;
-    console.log(cat);
 
     if (this.props.match.params.catname !== this.state.categoryName) {
-      this.setState({ categoryName: this.props.match.params.catname});
+      this.setState({ categoryName: this.props.match.params.catname });
 
       this.loadContent(this.props.match.params.catname);
     }
@@ -113,12 +113,16 @@ class Contents extends Component {
         <div className="divContents">
           <div className="search-wrapper">
             <div className="seacrh-tags">
-              <Card title={<Search
-              placeholder="Пошук"
-              onSearch={this.handleSearch}
-              onChange={this.handleSearchValue}
-              style={{ width: 200 }}
-            />}>
+              <Card
+                title={
+                  <Search
+                    placeholder="Пошук"
+                    onSearch={this.handleSearch}
+                    onChange={this.handleSearchValue}
+                    style={{ width: 200 }}
+                  />
+                }
+              >
                 {this.state.tags.map((item) => {
                   return (
                     <CheckableTag
@@ -142,7 +146,14 @@ class Contents extends Component {
                 return <ContentsInfo item={item} key={item.id} key2={inc} />;
               })
             ) : (
-              <div className="noneContent">Нічого не знайдено</div>
+              <Empty
+                style={{
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  display: "block",
+                }}
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+              />
             )}
           </div>
         </div>

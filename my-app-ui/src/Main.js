@@ -30,6 +30,7 @@ import NewContent from "comp/NewContent";
 import NewGallery from "comp/NewGallery";
 import ProfileUpdate from "comp/ProfileUpdate";
 import ContentDetails from "comp/ContentDetails";
+import { Avatar, Button, Dropdown, Image } from "antd";
 
 function parseJwt(token) {
   const base64 = token.split(".")[1];
@@ -108,43 +109,58 @@ function Main() {
       });
   }
 
+  const items = [
+    {
+      label: (
+        <Button
+          type="text"
+          onClick={() =>
+            history.push(`${match.url}/user-details/` + userInfo.id)
+          }
+        >
+          Профіль
+        </Button>
+      ),
+      key: "0",
+    }, // remember to pass the key prop
+    {
+      label: (
+        <Button type="text" danger onClick={routeChange}>
+          Вийти
+        </Button>
+      ),
+      key: "1",
+    },
+  ];
+
   return userInfo ? (
     <Layout>
       <Sider>
-        <HomeFilled
-          style={{
-            fontSize: "24px",
-            color: grey[0],
-            padding: "24px 24px 16px 24px",
-          }}
-        />
-        <Categories />
+        <Link to="/auth/contents">
+          <HomeFilled
+            style={{
+              fontSize: "24px",
+              color: grey[0],
+              padding: "24px 24px 16px 24px",
+            }}
+          />
+        </Link>
+        <Categories history={history} />
       </Sider>
       <Layout>
         <Header
           className="site-layout-sub-header-background"
           style={{
-            padding: 0,
+            padding: '0 15px',
+            textAlign: 'right',
           }}
         >
-          <ul>
-            <img
-              className="navAvatar"
+          <Dropdown menu={{ items }}>
+            <Avatar
               src={userInfo.avatarPath}
-              alt="Icon of company"
-              width="100"
-              height="75"
-            ></img>
-            <Link
-              className="toProfile"
-              to={`${match.url}/user-details/` + userInfo.id}
-            >
-              {userInfo.userName}
-            </Link>
-            <button className="logout" onClick={routeChange}>
-              Вийти
-            </button>
-          </ul>
+              style={{ backgroundColor: grey[0] }}
+            />
+          </Dropdown>
         </Header>
         <Content
           style={{
@@ -163,7 +179,7 @@ function Main() {
                 component={UserDetails}
               />
               <Route
-                path={`${match.url}/contents/:catname`}
+                path={[`${match.url}/contents/:catname`, `${match.url}/contents`]}
                 component={Contents}
               />
               <Route path={`${match.url}/categories/`} component={Categories} />
@@ -207,7 +223,7 @@ function Main() {
             textAlign: "center",
           }}
         >
-          Ant Design ©2018 Created by Ant UED
+          Дипломна робота 2022
         </Footer>
       </Layout>
     </Layout>

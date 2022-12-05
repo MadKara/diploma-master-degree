@@ -36,9 +36,9 @@ class Categories extends Component {
   }
   render() {
     return (
-      <Menu theme="dark" mode="inline">
+      <Menu theme="dark" mode="inline" selectedKeys={this.props.history.location.pathname.split('/')}>
         {this.state.items.map((item, index) => (
-          <Menu.Item key={item.id}>
+          <Menu.Item key={item.name}>
             <NavLink to={"/auth/contents/" + item.name}>
               <span>{item.name}</span>
             </NavLink>

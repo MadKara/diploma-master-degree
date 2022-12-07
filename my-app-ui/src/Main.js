@@ -151,8 +151,8 @@ function Main() {
         <Header
           className="site-layout-sub-header-background"
           style={{
-            padding: '0 15px',
-            textAlign: 'right',
+            padding: "0 15px",
+            textAlign: "right",
           }}
         >
           <Dropdown menu={{ items }}>
@@ -179,7 +179,10 @@ function Main() {
                 component={UserDetails}
               />
               <Route
-                path={[`${match.url}/contents/:catname`, `${match.url}/contents`]}
+                path={[
+                  `${match.url}/contents/:catname`,
+                  `${match.url}/contents`,
+                ]}
                 component={Contents}
               />
               <Route path={`${match.url}/categories/`} component={Categories} />

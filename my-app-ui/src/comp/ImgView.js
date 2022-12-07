@@ -11,6 +11,7 @@ export default function ImgView(props) {
   console.log(images);
   return (
     <ViewCart
+      height={props.height ?? 200}
       cart={[
         {
           id: 1,
@@ -21,7 +22,7 @@ export default function ImgView(props) {
   );
 }
 
-const ViewCart = ({ cart }) => {
+const ViewCart = ({ cart, height }) => {
   const [indexes, setIndexes] = useState({});
 
   const nextSlide = (item) => {
@@ -39,7 +40,7 @@ const ViewCart = ({ cart }) => {
     <div>
       {cart.map((item) => (
         <div key={item.id} className="slideshow-container fade">
-          <div className="img-wrap">
+          <div className="img-wrap" style={{ height: `${height}px` }}>
             <a className="prev" onClick={() => prevSlide(item)}>
               &#10094;
             </a>
@@ -53,7 +54,7 @@ const ViewCart = ({ cart }) => {
                 alt="imgCardInfo"
               />
             ) : (
-              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+              <Empty style={{ height: `${height}px`, width: `${height}px` }} image={Empty.PRESENTED_IMAGE_SIMPLE} />
             )}
           </div>
         </div>

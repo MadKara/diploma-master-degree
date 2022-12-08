@@ -21,7 +21,11 @@ function ContentEditor(props) {
   return (
     <List.Item>
       <List.Item.Meta
-        avatar={<Gallery Id={item.id} height={150} />}
+        avatar={
+          <div style={{ minWidth: "150px" }}>
+            <Gallery Id={item.id} height={150} />
+          </div>
+        }
         title={
           <div>
             <Row>

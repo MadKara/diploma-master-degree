@@ -107,11 +107,9 @@
 }
 
 .comments {
-    border: 2px solid #f76707;
     background-color: #fff4e6;
     grid-column-start: 1;
     grid-column-end: 3;
-    width: 60%;
 }
 
 .box2 {

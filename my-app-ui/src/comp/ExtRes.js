@@ -35,27 +35,27 @@ class ExtRes extends Component {
         console.log(this.state.links)
         let browse = null;
         if (this.state.links.browseLink !== null) {
-            browse = (<a href={this.state.links.browseLink}><FaSistrix size="50px" /></a>);
+            browse = (<a href={this.state.links.browseLink}><FaSistrix size="24px" /></a>);
         }
         let inst = null;
         if (this.state.links.instagram !== null) {
-            inst = (<a href={this.state.links.instagram}><FaInstagram size="50px" /></a>);
+            inst = (<a href={this.state.links.instagram}><FaInstagram size="24px" /></a>);
         }
         let twit = null;
         if (this.state.links.twitter !== null) {
-            twit = (<a href={this.state.links.twitter}><FaTwitter size="50px" /></a>);
+            twit = (<a href={this.state.links.twitter}><FaTwitter size="24px" /></a>);
         }
         let tt = null;
         if (this.state.links.tiktok !== null) {
-            tt = (<a href={this.state.links.tiktok}><FaTiktok size="50px" /></a>);
+            tt = (<a href={this.state.links.tiktok}><FaTiktok size="24px" /></a>);
         }
         let teleg = null;
         if (this.state.links.telegram !== null) {
-            teleg = (<a href={this.state.links.telegram}><FaTelegram size="50px" /></a>);
+            teleg = (<a href={this.state.links.telegram}><FaTelegram size="24px" /></a>);
         }
         let yt = null;
         if (this.state.links.youtube !== null) {
-            yt = (<a href={this.state.links.youtube}><FaYoutube size="50px" /></a>);
+            yt = (<a href={this.state.links.youtube}><FaYoutube size="24px" /></a>);
         }
         return (
             <div>

@@ -1,8 +1,6 @@
 /* Slideshow container */
 .slideshow-container {
     position: relative;
-    border: 2px solid black;
-    background-color: cadetblue;
 }
 
 /* Next & previous buttons */
@@ -54,7 +52,6 @@
 }
 
 .img-wrap {
-    height: 200px;
     display: inline-block;
     overflow: hidden;
     justify-content: center;

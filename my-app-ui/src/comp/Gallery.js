@@ -27,7 +27,7 @@ class Gallery extends Component {
 
     render() {
         return (
-            <ImgView item={this.state.images} />
+            <ImgView height={this.props.height} item={this.state.images} />
         );
     }
 }
